@@ -1,0 +1,39 @@
+-- Tabla Profesionales
+CREATE TABLE Profesionales (
+  Id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  Nombres VARCHAR(255) NOT NULL,
+  Apellidos VARCHAR(255) NOT NULL,
+  IdTipoDocumento INTEGER REFERENCES TipoDocumentos(Id),
+  Documento VARCHAR(50) NOT NULL,
+  IdProfesion INTEGER REFERENCES TipoProfesiones(Id),
+  IdUsuario INTEGER REFERENCES Usuarios(Id),
+  IdStatus INTEGER REFERENCES Status(Id),
+  IsDeleted BOOLEAN,
+  Create_dt TIMESTAMP
+);
+
+CREATE TABLE TipoDocumentos (
+  Id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  NombreDocumento VARCHAR(255) NOT NULL
+);
+
+-- Tabla TipoProfesiones
+CREATE TABLE TipoProfesiones (
+  Id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  NombreProfesion VARCHAR(255) NOT NULL,
+  IsActive BOOLEAN
+);
+
+-- Tabla Usuarios
+CREATE TABLE Usuarios (
+  Id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  Usuario VARCHAR(255) NOT NULL,
+  Clave VARCHAR(255) NOT NULL,
+  IsActive BOOLEAN
+);
+
+-- Tabla Status
+CREATE TABLE Status (
+  Id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  NombreStatus VARCHAR(255) NOT NULL
+);
