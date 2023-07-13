@@ -4,27 +4,50 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Usuario } from "./entities/usuario.entity";
 import { Repository } from "typeorm";
 import { ServiceResponse } from "src/common/utils/services-response";
+import { hash } from 'bcrypt';
+import { LoggerService } from "src/common/logger/logger.service";
 
 @Injectable()
 export class UsuariosService {
 
     constructor(
         @InjectRepository(Usuario)
-        private readonly usuarioRepo: Repository<Usuario>
+        private readonly usuarioRepo: Repository<Usuario>,
+        private readonly _logger: LoggerService
+
     ) { }
 
 
     public async CreateUser(payload: CreateUserDto): Promise<ServiceResponse> {
         try {
-            const entity = Object.assign(new Usuario(), { ...payload, IsActive: true });
-            await this.usuarioRepo.save(entity);
-            console.info('Usuario creado');
-            return new ServiceResponse(HttpStatus.OK, "Usuario creado", entity);
+            const validateUser = await this.GetByUser(payload.Correo);
+            if (validateUser.code !== HttpStatus.NOT_FOUND) {
+                return new ServiceResponse(HttpStatus.BAD_REQUEST, "Ya existe un registro con este correo", {Correo: payload.Correo});
+            }
+            const entity = Object.assign(new Usuario(), { ...payload, IsActive: true });    
+            entity.Clave = await hash(payload.Clave, 10);
+
+            const result = await this.usuarioRepo.save(entity);
+            this._logger.info(`UsuariosService: Usuario ${payload.Correo} creado correctamente`);
+            return new ServiceResponse(HttpStatus.OK, "Usuario creado", { Usuario: payload.Correo, Id: result.id});
         } catch (error) {
-            console.error(`Error no controlado ${error}`);
+            this._logger.error(`CreateUser: Error no controlado ${error}`);
             throw error;
         }
+    }
 
+    public async GetByUser(usuario: string): Promise<ServiceResponse> {
+        try {
+            const user = await this.usuarioRepo.findOne({ where: { IsActive: true, Correo: usuario } });
+            if (user) {
+                return new ServiceResponse(HttpStatus.OK, "", user);
+            } else {
+                return new ServiceResponse(HttpStatus.NOT_FOUND, "El usuario especificado no existe", null);
+            }
+        } catch (error) {
+            this._logger.error(`GetByUser: Error no controlado ${error}`);
+            throw error;
+        }
     }
 
 }
