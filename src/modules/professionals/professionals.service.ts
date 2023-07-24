@@ -1,17 +1,17 @@
-import { HttpStatus, Injectable } from "@nestjs/common";
-import { ServiceResponse } from "src/common/utils/services-response";
-import { SignUpProfesionalDto } from "./dto/request/signup-profesional.dto";
-import { TiposDocumentosService } from "../tipo-documentos/tipo-documentos.service";
-import { TiposProfesionesService } from "../tipo-profesiones/tipo-profesiones.service";
-import { UsuariosService } from "src/modules/usuarios/usuario.service";
-import { InjectRepository } from "@nestjs/typeorm";
-import { Profesionales } from "./entities/profesional.entity";
-import { Repository } from "typeorm";
-import { AuthService } from "../auth/auth.service";
-import { LoggerService } from "src/common/logger/logger.service";
+import { HttpStatus, Injectable } from '@nestjs/common';
+import { TiposDocumentosService } from '../tipo-documentos/tipo-documentos.service';
+import { TiposProfesionesService } from '../tipo-profesiones/tipo-profesiones.service';
+import { UsuariosService } from '../usuarios/usuario.service';
+import { AuthService } from '../auth/auth.service';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Profesionales } from './entities/profesional.entity';
+import { Repository } from 'typeorm';
+import { SignUpProfesionalDto } from './dto/request/signup-profesional.dto';
+import { ServiceResponse } from 'src/common/utils/services-response';
+import { LoggerService } from 'src/common/logger/logger.service';
 
 @Injectable()
-export class ProfesionalesService {
+export class ProfessionalsService {
     constructor(
         private readonly _serviceDocsTypes: TiposDocumentosService,
         private readonly _serviceProfesionsTypes: TiposProfesionesService,
