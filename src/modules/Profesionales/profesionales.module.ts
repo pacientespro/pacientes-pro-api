@@ -6,7 +6,7 @@ import { TiposDocumentosModule } from "../tipo-documentos/tipo-documentos.module
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { Profesionales } from "./entities/profesional.entity";
 import { TiposProfesionesModule } from "../tipo-profesiones/tipo-profesiones.module";
-import { UsuariosModule } from "../usuarios/usuario.module";
+import { UsuariosModule } from "src/modules/usuarios/usuario.module";
 import { CommonModule } from "src/common/common.module";
 
 @Module({

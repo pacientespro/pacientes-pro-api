@@ -3,7 +3,7 @@ import { ServiceResponse } from "src/common/utils/services-response";
 import { SignUpProfesionalDto } from "./dto/request/signup-profesional.dto";
 import { TiposDocumentosService } from "../tipo-documentos/tipo-documentos.service";
 import { TiposProfesionesService } from "../tipo-profesiones/tipo-profesiones.service";
-import { UsuariosService } from "../usuarios/usuario.service";
+import { UsuariosService } from "src/modules/usuarios/usuario.service";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Profesionales } from "./entities/profesional.entity";
 import { Repository } from "typeorm";
