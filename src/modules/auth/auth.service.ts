@@ -26,19 +26,19 @@ export class AuthService {
     async login(payload: LoginDto): Promise<ServiceResponse> {
         try {
             const user = await this._serviceUsers.GetByUser(payload.Correo);
-            if (!user) {
+            if (!user.isSucceded) {
                 return new ServiceResponse(HttpStatus.UNAUTHORIZED, "Usuario o clave incorrectos", null);
-            }
+            } 
             const isValid = await compare(payload.Clave, user.content.Clave);
             if (!isValid) {
                 return new ServiceResponse(HttpStatus.UNAUTHORIZED, "Usuario o clave incorrectos", null);
             }
             const token = await this.generateToken({ user: payload.Correo, userId: user.content.Id })
-            return new ServiceResponse(HttpStatus.OK,"Usuario logueado correctamente", {token}) 
+            return new ServiceResponse(HttpStatus.OK, "Usuario logueado correctamente", { token })
         } catch (error) {
             this._logger.error(`Profesionales-SignUp: Error no controlado ${error}`);
             throw error;
         }
-        
+
     }
 }
