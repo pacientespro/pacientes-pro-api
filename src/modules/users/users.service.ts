@@ -1,15 +1,14 @@
-import { HttpStatus, Injectable } from "@nestjs/common";
-import { CreateUserDto } from "./dto/requests/create-user.dto";
-import { InjectRepository } from "@nestjs/typeorm";
-import { Usuario } from "./entities/usuario.entity";
-import { Repository } from "typeorm";
-import { ServiceResponse } from "src/common/utils/services-response";
+import { HttpStatus, Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Usuario } from './entities/usuario.entity';
+import { Repository } from 'typeorm';
+import { LoggerService } from 'src/common/logger/logger.service';
+import { ServiceResponse } from 'src/common/utils/services-response';
 import { hash } from 'bcrypt';
-import { LoggerService } from "src/common/logger/logger.service";
+import { CreateUserDto } from './requests/create-user.dto';
 
 @Injectable()
-export class UsuariosService {
-
+export class UsersService {
     constructor(
         @InjectRepository(Usuario)
         private readonly usuarioRepo: Repository<Usuario>,

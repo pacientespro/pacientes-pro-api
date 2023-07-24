@@ -2,15 +2,15 @@ import { HttpStatus, Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { LoginDto } from "./dto/requests/login.dto";
 import { ServiceResponse } from "src/common/utils/services-response";
-import { UsuariosService } from "src/modules/usuarios/usuario.service";
 import { compare } from 'bcrypt';
 import { LoggerService } from "src/common/logger/logger.service";
+import { UsersService } from "../users/users.service";
 
 @Injectable()
 export class AuthService {
     constructor(
         private readonly jwtService: JwtService,
-        private readonly _serviceUsers: UsuariosService,
+        private readonly _serviceUsers: UsersService,
         private readonly _logger: LoggerService
 
     ) { }

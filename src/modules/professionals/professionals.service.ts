@@ -1,7 +1,6 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { TiposDocumentosService } from '../tipo-documentos/tipo-documentos.service';
 import { TiposProfesionesService } from '../tipo-profesiones/tipo-profesiones.service';
-import { UsuariosService } from '../usuarios/usuario.service';
 import { AuthService } from '../auth/auth.service';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Profesionales } from './entities/profesional.entity';
@@ -9,13 +8,14 @@ import { Repository } from 'typeorm';
 import { SignUpProfesionalDto } from './dto/request/signup-profesional.dto';
 import { ServiceResponse } from 'src/common/utils/services-response';
 import { LoggerService } from 'src/common/logger/logger.service';
+import { UsersService } from '../users/users.service';
 
 @Injectable()
 export class ProfessionalsService {
     constructor(
         private readonly _serviceDocsTypes: TiposDocumentosService,
         private readonly _serviceProfesionsTypes: TiposProfesionesService,
-        private readonly _serviceUsers: UsuariosService,
+        private readonly _serviceUsers: UsersService,
         private readonly _auth: AuthService,
         @InjectRepository(Profesionales)
         private readonly repo: Repository<Profesionales>,
