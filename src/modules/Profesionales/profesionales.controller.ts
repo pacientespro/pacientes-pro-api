@@ -6,14 +6,7 @@ import { SignUpProfesionalDto } from "./dto/request/signup-profesional.dto";
 @Controller('api/profesionales')
 export class ProfesionalesController{
     constructor(private service: ProfesionalesService){}
-
-    @Get('hello-world')
-    @ApiOperation({summary: 'example'})
-    async Hello(@Res() response){
-        return response.status(200).send('Hola mundo');
-    } 
-
-
+    
     @Post('sign-up')
     @ApiOperation({summary: 'Creacion de Profesional mediante signup'})
     @ApiBody({type: SignUpProfesionalDto})
