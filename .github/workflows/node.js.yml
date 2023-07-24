@@ -24,8 +24,11 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
 
+      - name: Install NestJS 9.0
+        run: npm install @nestjs/core@9.0.0
+
       - name: Install TypeScript
-        run: npm install -g typescript
+        run: npm install -g typescript@4.3.5
 
       - run: npm ci
 
