@@ -8,6 +8,7 @@ import { TiposDocumentosModule } from 'src/modules/tipo-documentos/tipo-document
 import { AuthModule } from './modules/auth/auth.module';
 import { ProfessionalsModule } from './modules/professionals/professionals.module';
 import { UsersModule } from './modules/users/users.module';
+import { HelperModule } from './common/helper/helper.module';
 
 @Module({
   imports: [
@@ -20,7 +21,8 @@ import { UsersModule } from './modules/users/users.module';
     TiposDocumentosModule,
     AuthModule,
     ProfessionalsModule,
-    UsersModule
+    UsersModule,
+    HelperModule
   ],
   controllers: [AppController],
   providers: [AppService],

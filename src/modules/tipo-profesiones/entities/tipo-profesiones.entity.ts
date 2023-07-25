@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 
 @Entity('tipoprofesiones')
 export class TipoProfesiones{
@@ -10,4 +10,5 @@ export class TipoProfesiones{
 
   @Column({ nullable: false, name: 'isactive' })
   IsActive: boolean;
+
 }

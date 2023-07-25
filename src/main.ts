@@ -15,6 +15,8 @@ async function bootstrap() {
   if (configService.get('ENABLE_DOCUMENTATION') === 'true') {
     setupSwagger(app);
   }
+
+  // app.use(AuthMiddleware);
   
   const port = configService.get('PORT') || 3999;
   await app.listen(port, () => console.info(`Listening on port ${port}`));
