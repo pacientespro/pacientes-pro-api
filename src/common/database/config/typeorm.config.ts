@@ -12,7 +12,7 @@ const TypeOrmConfig: TypeOrmModuleOptions = {
   entities: ['dist/**/*.entity.{ts,js}'],
   migrations: ['dist/migrations/*{.ts,.js}'],
   migrationsRun: true,
-  ssl: { rejectUnauthorized: false },
+  // ssl: { rejectUnauthorized: false },
   synchronize: process.env.DATABASE_SYNCHRONIZE === "true",
   logging: false,
   autoLoadEntities: true
